@@ -1,10 +1,12 @@
 // const DashboardPage = require('./../po/pages/dashboard.page');
 
-import DashboardPage from "../../po/pages/dashboard.page";
-import DoctorsPage from "../../po/pages/doctors.page";
+import DashboardPage from "../po/pages/dashboard.page";
+import DoctorsPage from "../po/pages/doctors.page";
 
 const dashboardPage = new DashboardPage();
 const doctorsPage = new DoctorsPage();
+
+import {} from './../po';
 
 describe('Doctors page', () => {
     beforeEach( async () => {
