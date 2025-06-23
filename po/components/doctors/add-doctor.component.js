@@ -1,8 +1,11 @@
-class AddDoctorComponent {
+import BaseComponent from "../common/base.component";
 
-    get rootEl() {
-        return $('.new-doctor-dialog');
+class AddDoctorComponent extends BaseComponent {
+
+    constructor() {
+        super('.new-doctor-dialog')
     }
+
 }
 
 export default AddDoctorComponent;
