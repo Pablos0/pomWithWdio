@@ -1,16 +1,18 @@
 // const DashboardPage = require('./../po/pages/dashboard.page');
-
+/*
 import DashboardPage from "../po/pages/dashboard.page";
 import DoctorsPage from "../po/pages/doctors.page";
+import pages from "./../po";
 
-const dashboardPage = new DashboardPage();
+const dashboardPage = new DashboardPage(); // review if these two lines are necesary 
 const doctorsPage = new DoctorsPage();
+*/ 
 
-import {} from './../po';
+import {pages} from './../po';
 
 describe('Doctors page', () => {
     beforeEach( async () => {
-        await dashboardPage.open();
+        await pages.dashboard.open();
       //  await browser.url('https://ej2.syncfusion.com/showcase/angular/appointmentplanner/#/dashboard');
     });
 
@@ -26,40 +28,43 @@ describe('Doctors page', () => {
 
     it('Open modal window for adding a new doctor', async () => {
         // click on doctors item in the side menu
-        await dashboardPage.sideMenu.item('doctors').click();
+        await pages.dashboard.sideMenu.item('doctors').click();
         // click on add new doctor btn
-        await doctorsPage.doctorsListHeader.addNewDoctorBtn.click();
+        await pages.doctors.doctorsListHeader.addNewDoctorBtn.click();
         // check that a model window is displayed
-        await expect(doctorsPage.addDoctorModal.rootEl).toBeDisplayed();
+        await expect(pages.doctors.addDoctorModal.rootEl).toBeDisplayed();
     });
 
     it('Add a new doctor', async () => {
         // click on doctors item in the side menu
-        await dashboardPage.sideMenu.item('doctors').click();
+        await pages.dashboard.sideMenu.item('doctors').click();
         // click on add new doctor btn
-        await doctorsPage.doctorsListHeader.addNewDoctorBtn.click();
+        await pages.doctors.doctorsListHeader.addNewDoctorBtn.click();
+        // await pages('doctors').doctorsListHeader.addNewDoctorBtn.click();
         // wait for visibility of modal window
-        await doctorsPage.addDoctorModal.rootEl.waitForDisplayed();
+        await expect(pages.doctors.addDoctorModal.rootEl).toBeDisplayed();
+        //await pages('doctors').addDoctorModal.rootEl.waitForDisplayed();
 
-        await $('[name="Name"]').setValue('John Doe');
-        await $('#DoctorMobile').setValue('11111111111111');
-        await $('[name="Email"]').setValue('test@test.com');
-        await $('[name="Education"]').setValue('Basic');
-        await $('[name="Designation"]').setValue('Test');
+        await pages.doctors.addDoctorModal.input('name').setValue('John Doe');
+        await pages.doctors.addDoctorModal.input('phone').setValue('11111111111111');
+        await pages.doctors.addDoctorModal.input('email').setValue('test@test.com');
+        await pages.doctors.addDoctorModal.input('education').setValue('Basic');
+        await pages.doctors.addDoctorModal.input('designation').setValue('Test');
 
-        await $('.e-footer-content button.e-primary').click();
+        await pages.doctors.addDoctorModal.saveBtn.click();
 
-        await expect(doctorsPage.addDoctorModal.rootEl).not.toBeDisplayed();
+        await expect(pages.doctors.addDoctorModal.rootEl).not.toBeDisplayed();
 
-        await expect($('#Specialist_8').$('.name')).toHaveText('Dr. John Doe');
-        await expect($('#Specialist_8').$('.education')).toHaveText('Basic', {ignoreCase: true}); // ignoreCase will ignore lower and upper case.
+        await expect(pages.doctors.specialistCard(8).name).toHaveText('Dr. John Doe');
+        await expect(pages.doctors.specialistCard(8).education).toHaveText('Basic', {ignoreCase: true}); // ignoreCase will ignore lower and upper case.
     });
 
     it('Close a modal window for adding a new doctor', async () => {
-        await dashboardPage.sideMenu.item('doctors').click();
-        await doctorsPage.doctorsListHeader.addNewDoctorBtn.click();
-        await doctorsPage.addDoctorModal.rootEl.waitForDisplayed();
-        await $('.new-doctor-dialog .e-dlg-closeicon-btn').click();
-        await expect(doctorsPage.addDoctorModal.rootEl).not.toBeDisplayed();
+        await pages.dashboard.sideMenu.item('doctors').click();
+        await pages.doctors.doctorsListHeader.addNewDoctorBtn.click();
+        await pages.doctors.addDoctorModal.rootEl.waitForDisplayed();
+        // await $('.new-doctor-dialog .e-dlg-closeicon-btn').click();
+        await pages.doctors.addDoctorModal.closeBtn.click();
+        await expect(pages.doctors.addDoctorModal.rootEl).not.toBeDisplayed();
     });
 })

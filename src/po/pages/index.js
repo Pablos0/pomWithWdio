@@ -1,10 +1,10 @@
-import DashboardPage from "./dashboard.page";
-import DoctorsPage from "./doctors.page";
+import DashboardPage from "./dashboard.page.js";
+import DoctorsPage from "./doctors.page.js";
 
 
-/**
+/** 
  * 
- * @param {'dashboard' | 'doctors'} name 
+ * @param name {'dashboard' | 'doctors'}  
  * @returns {DashboardPage | DoctorsPage}
  */
 
@@ -19,7 +19,6 @@ function pages(name) {
 }
 
 export default {
-    DashboardPage,
-    DoctorsPage,
-    pages,
+    dashboard: new DashboardPage(),
+    doctors: new DoctorsPage()
 }

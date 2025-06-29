@@ -1,4 +1,7 @@
-import { Header, SideMenu } from '../components';
+
+import { Header, SideMenu } from './../components/index.js'
+// import Header from './../components/common/header.component';
+//import SideMenuComponent from '../components/common/sidemenu.component';
 
 class BasePage {
     

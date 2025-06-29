@@ -1,13 +1,18 @@
 import BaseComponent from './base.component';
 
 class SideMenuComponent extends BaseComponent {
-    
+
     constructor() {
         super('#plannerSiderBar');
     }
     
+   /* get rootEl() {
+        return $('#plannerSideBar');
+    } */
+    
     get name() {
-        return this.rootEl.$('.name');
+       // return this.rootEl.$('.name');
+       return $('#plannerSiderBar .name');
     }
 
     item(param) {
@@ -16,7 +21,8 @@ class SideMenuComponent extends BaseComponent {
             schedule: '[routerlink="/calendar"]',
             doctors: '[routerlink="/doctors"]'
         };
-        return this.rootEl.$(selectors[param.toLowerCase()]);
+       return this.rootEl.$(selectors[param.toLowerCase()]);
+      //  return $(`#plannerSideBar ${selectors[param.toLowerCase()]}`);
     }
 }
 
